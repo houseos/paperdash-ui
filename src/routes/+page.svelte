@@ -1,9 +1,36 @@
 <script lang="ts">
-	import type { WidgetType } from '$lib/components/widget/widget-types';
+	import type { WidgetConfig, WidgetType } from '$lib/components/widget/widget-types';
 	import Widget from '$lib/components/widget/widget.svelte';
 	import dayjs from 'dayjs';
+	import { page } from '$app/stores';
 
-	export let widgets: WidgetType[] = ['welcome', 'weather', 'srs', 'joke'];
+	let widgets: WidgetConfig[] = [];
+
+	try {
+		const rawWidgetsConfig: any[] = JSON.parse($page.url.searchParams.get('widgets')!);
+
+		rawWidgetsConfig.forEach((widget) => {
+			const options: any = {};
+			widget.options.forEach((option: any) => (options[option.id] = option.value));
+
+			widgets.push({
+				id: widget.id,
+				options
+			});
+		});
+	} catch (error) {}
+
+	if (widgets.length === 0) {
+		widgets = [
+			{
+				id: 'welcome',
+				options: { username: 'User' }
+			}
+		];
+		console.log('used default config');
+	}
+
+	console.log(widgets);
 </script>
 
 <div class="header">
@@ -14,7 +41,7 @@
 
 <div class="widgets">
 	{#each widgets as widget}
-		<Widget {widget} />
+		<Widget widget={widget.id} options={widget.options} />
 	{/each}
 </div>
 
@@ -31,7 +58,7 @@
 		padding: 0px 50px;
 
 		.time {
-			font-size: 50px;
+			font-size: 30px;
 		}
 	}
 

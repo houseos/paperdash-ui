@@ -1,22 +1,23 @@
 <script lang="ts">
-	import type { WidgetType } from './widget-types';
+	import type { WidgetConfig, WidgetType } from './widget-types';
 	import JokeWidget from './widgets/joke-widget.svelte';
 	import SrsWidget from './widgets/srs-widget.svelte';
 	import WeatherWidget from './widgets/weather-widget.svelte';
 	import WelcomeWidget from './widgets/welcome-widget.svelte';
 
 	export let widget: WidgetType;
+	export let options: any;
 </script>
 
 <div class="container">
 	{#if widget == 'welcome'}
-		<WelcomeWidget />
+		<WelcomeWidget {options} />
 	{:else if widget == 'srs'}
-		<SrsWidget />
+		<SrsWidget {options} />
 	{:else if widget == 'weather'}
-		<WeatherWidget />
+		<WeatherWidget {options} />
 	{:else if widget == 'joke'}
-		<JokeWidget />
+		<JokeWidget {options} />
 	{:else}
 		<p>unknown widget</p>
 	{/if}
