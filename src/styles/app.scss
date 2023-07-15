@@ -1,0 +1,26 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 100px;
+    font-family: 'Abril Fatface', sans-serif;
+}
+
+hr {
+    width: 100%;
+    border: none;
+    height: 5px;
+    background: #000;
+}
