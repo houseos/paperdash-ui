@@ -1,8 +1,19 @@
 <script lang="ts">
-	type Options = {
-	};
+	type Options = {};
 
 	export let options: Options;
+
+	function loadJoke(): Promise<string> {
+		return fetch('https://v2.jokeapi.dev/joke/Programming?format=txt').then((res) => res.text());
+	}
 </script>
 
-<p>Joke</p>
+{#await loadJoke() then joke}
+	<p>{joke}</p>
+{/await}
+
+<style>
+	p {
+		white-space: pre-wrap;
+	}
+</style>
