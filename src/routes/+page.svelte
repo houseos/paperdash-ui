@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { WidgetConfig, WidgetType } from '$lib/components/widget/widget-types';
+	import type { WidgetConfig } from '$lib/components/widget/widget-types';
 	import Widget from '$lib/components/widget/widget.svelte';
 	import dayjs from 'dayjs';
 	import { page } from '$app/stores';
@@ -24,7 +24,21 @@
 		widgets = [
 			{
 				id: 'welcome',
-				options: { username: 'User' }
+				options: {
+					username: 'User',
+				}
+			},
+			{
+				id: 'weather'
+			},
+			{
+				id: 'srs',
+				options: {
+					location: 24900,
+				}
+			},
+			{
+				id: 'joke'
 			}
 		];
 		console.log('used default config');
