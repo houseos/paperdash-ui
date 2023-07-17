@@ -5,20 +5,21 @@
 	import WeatherWidget from './widgets/weather-widget.svelte';
 	import WelcomeWidget from './widgets/welcome-widget.svelte';
 
+	const WIDGET_COMPONENTS: Partial<Record<WidgetType, any>> = {
+		welcome: WelcomeWidget,
+		srs: SrsWidget,
+		weather: WeatherWidget,
+		joke: JokeWidget
+	};
+
 	export let widget: WidgetType;
 	export let options: any;
 </script>
 
 <div class="container">
-	{#if widget == 'welcome'}
-		<WelcomeWidget {options} />
-	{:else if widget == 'srs'}
-		<SrsWidget {options} />
-	{:else if widget == 'weather'}
-		<WeatherWidget {options} />
-	{:else if widget == 'joke'}
-		<JokeWidget {options} />
-	{:else}
+	<svelte:component this={WIDGET_COMPONENTS[widget]} {options} />
+
+	{#if !WIDGET_COMPONENTS[widget]}
 		<p>unknown widget</p>
 	{/if}
 </div>
