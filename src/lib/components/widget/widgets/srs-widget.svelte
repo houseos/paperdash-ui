@@ -149,6 +149,7 @@
 
 		&.highlighted {
 			background: red;
+			color: white;
 		}
 	}
 </style>
