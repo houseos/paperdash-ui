@@ -108,7 +108,7 @@
 					<div class="title">
 						<span class="name">{name[0]}</span>
 						<span class="price">
-							{item.price.discount.toFixed(2)}€|{item.price.internal.toFixed(2)}€
+							{item.price?.discount?.toFixed(2)}€|{item.price?.internal?.toFixed(2)}€
 						</span>
 					</div>
 					<span class="desc">{name.slice(1).join(', ')}</span>
@@ -125,12 +125,12 @@
 	.items {
 		display: flex;
 		flex-direction: column;
-		font-size: 1.3rem;
+		font-size: 1rem;
 		padding: 1rem 0;
 	}
 
 	.item {
-		padding: 0.5rem 1rem;
+		padding: 0.2rem 1rem;
 
 		.name {
 			font-size: 1.5rem;
@@ -139,6 +139,7 @@
 
 		.price {
 			font-family: monospace;
+			font-weight: bold;
 		}
 
 		.title {

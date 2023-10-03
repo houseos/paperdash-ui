@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { WidgetConfig, WidgetType } from './widget-types';
+	import CalendarWidget from './widgets/calendar-widget.svelte';
 	import JokeWidget from './widgets/joke-widget.svelte';
 	import SrsWidget from './widgets/srs-widget.svelte';
 	import WeatherWidget from './widgets/weather-widget.svelte';
@@ -9,7 +10,8 @@
 		welcome: WelcomeWidget,
 		srs: SrsWidget,
 		weather: WeatherWidget,
-		joke: JokeWidget
+		joke: JokeWidget,
+		calendar: CalendarWidget,
 	};
 
 	export let widget: WidgetType;
