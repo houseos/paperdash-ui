@@ -1,6 +1,9 @@
 <script lang="ts">
 	import type { Dayjs } from 'dayjs';
 	import dayjs from 'dayjs';
+	import 'dayjs/locale/de';
+
+	dayjs.locale('de');
 
 	import weekOfYear from 'dayjs/plugin/weekOfYear';
 	dayjs.extend(weekOfYear);
