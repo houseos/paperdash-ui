@@ -33,6 +33,7 @@
 	"dependencies": {
 		"@fontsource/abril-fatface": "^5.0.5",
 		"@fontsource/poppins": "^5.0.5",
-		"dayjs": "^1.11.9"
+		"dayjs": "^1.11.9",
+		"svelte-markdown": "^0.4.0"
 	}
 }

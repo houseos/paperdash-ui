@@ -23,9 +23,9 @@
 	if (widgets.length === 0) {
 		widgets = [
 			{
-				id: 'welcome',
+				id: 'text',
 				options: {
-					username: 'User',
+					text: '# Hey\nThis can display **bold** and *italic* text and much more!',
 				}
 			},
 			{
@@ -48,7 +48,7 @@
 </script>
 
 <div class="header">
-	<h1>paperdash</h1>
+	<h1 class="title">paperdash</h1>
 	<span class="time">{dayjs().format('HH:mm')}</span>
 </div>
 <hr />

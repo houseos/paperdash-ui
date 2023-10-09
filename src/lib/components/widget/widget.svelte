@@ -4,10 +4,10 @@
 	import JokeWidget from './widgets/joke-widget.svelte';
 	import SrsWidget from './widgets/srs-widget.svelte';
 	import WeatherWidget from './widgets/weather-widget.svelte';
-	import WelcomeWidget from './widgets/welcome-widget.svelte';
+	import TextWidget from './widgets/text-widget.svelte';
 
 	const WIDGET_COMPONENTS: Partial<Record<WidgetType, any>> = {
-		welcome: WelcomeWidget,
+		text: TextWidget,
 		srs: SrsWidget,
 		weather: WeatherWidget,
 		joke: JokeWidget,
