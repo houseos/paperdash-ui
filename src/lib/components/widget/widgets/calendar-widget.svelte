@@ -47,6 +47,9 @@
 				const dateOnly = !!props['DTSTART;VALUE=DATE'];
 				let start;
 				let end;
+				let future;
+				let past;
+				let today;
 
 				if (dateOnly) {
 					start = dayjs(props['DTSTART;VALUE=DATE']);
@@ -64,13 +67,24 @@
 				}
 				const diff = start.diff(dayjs(), 'hours');
 
+				future = start.isAfter(dayjs(), 'day');
+				past = start.isBefore(dayjs(), 'day');
+				today = start.isSame(dayjs(), 'day');
+
+				if (end) {
+					past = dayjs().isAfter(end, 'day');
+					today =
+						dayjs().isAfter(start.subtract(1, 'day'), 'day') &&
+						dayjs().isBefore(end.add(1, 'day'), 'day');
+				}
+
 				return {
 					name: props['SUMMARY'].replace(/\[.*\]/, '') || 'unnamed',
 					start,
 					end,
-					future: start.isAfter(dayjs(), 'day'),
-					past: start.isBefore(dayjs(), 'day'),
-					today: start.isSame(dayjs(), 'day'),
+					future,
+					past,
+					today,
 					soon: diff <= 24 && diff >= -1,
 					dateOnly
 				};
@@ -98,7 +112,12 @@
 <div class="events">
 	{#each events as event}
 		{#if !event.past}
-			<div class="event" class:soon={event.soon} class:today={event.today}>
+			<div
+				class="event"
+				class:soon={event.soon}
+				class:today={event.today}
+				class:first-day={event.start.isSame(dayjs(), 'day')}
+			>
 				<strong class="name">{event.name}</strong>
 				{#if !event.dateOnly && !event.end}
 					<span>{event.start.format('HH:mm')}</span>
@@ -140,6 +159,18 @@
 		&.soon,
 		&.today {
 			outline: 4px solid red;
+		}
+
+		&:not(.first-day) {
+			&.today {
+				outline: none;
+				padding: 0 1rem;
+				font-size: 1rem;
+				margin: -0.25rem 0;
+				outline: none;
+				background: none;
+				color: #000;
+			}
 		}
 	}
 </style>
