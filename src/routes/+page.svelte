@@ -49,6 +49,7 @@
 
 <div class="header">
 	<h1 class="title">paperdash</h1>
+	<span class="time">{dayjs().format('DD.MM.YYYY')}</span>
 	<span class="time">{dayjs().format('HH:mm')}</span>
 </div>
 <hr />
