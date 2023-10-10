@@ -42,7 +42,7 @@
 					date: dayjs(`${year}-${month}-${day} ${hour}:${minute}Z`)
 				};
 			})
-			.sort((a, b) => a.date.date() - b.date.date());
+			.sort((a, b) => a.date.unix() - b.date.unix());
 	}
 
 	let events: CalendarItem[] = [];
