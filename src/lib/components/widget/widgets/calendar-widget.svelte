@@ -13,6 +13,7 @@
 		today: boolean;
 		soon: boolean;
 		dateOnly?: boolean;
+		oneDayOnly?: boolean;
 	};
 
 	export let options: Options;
@@ -86,7 +87,8 @@
 					past,
 					today,
 					soon: diff <= 24 && diff >= -1,
-					dateOnly
+					dateOnly,
+					oneDayOnly: start.isSame(end, 'day') || !end
 				};
 			});
 	}
@@ -119,11 +121,11 @@
 				class:first-day={event.start.isSame(dayjs(), 'day')}
 			>
 				<strong class="name">{event.name}</strong>
-				{#if !event.dateOnly && !event.end}
+				{#if !event.dateOnly && event.oneDayOnly}
 					<span>{event.start.format('HH:mm')}</span>
 				{/if}
 				<strong>{event.start.format('DD.MM.YYYY')}</strong>
-				{#if event.end}
+				{#if event.end && !event.oneDayOnly}
 					- <strong>{event.end.format('DD.MM.YYYY')}</strong>
 				{/if}
 			</div>
