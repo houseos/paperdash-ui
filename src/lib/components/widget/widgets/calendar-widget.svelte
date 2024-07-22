@@ -104,7 +104,7 @@
 	let events: CalendarItem[] = [];
 
 	onMount(async () => {
-		events = await readCalendars();
+		events = (await readCalendars()).filter((e) => !e.past).slice(0, 5);
 		console.log(events);
 	});
 </script>
@@ -113,23 +113,21 @@
 
 <div class="events">
 	{#each events as event}
-		{#if !event.past}
-			<div
-				class="event"
-				class:soon={event.soon}
-				class:today={event.today}
-				class:first-day={event.start.isSame(dayjs(), 'day')}
-			>
-				<strong class="name">{event.name}</strong>
-				{#if !event.dateOnly && event.oneDayOnly}
-					<span>{event.start.format('HH:mm')}</span>
-				{/if}
-				<strong>{event.start.format('DD.MM.YYYY')}</strong>
-				{#if event.end && !event.oneDayOnly}
-					- <strong>{event.end.format('DD.MM.YYYY')}</strong>
-				{/if}
-			</div>
-		{/if}
+		<div
+			class="event"
+			class:soon={event.soon}
+			class:today={event.today}
+			class:first-day={event.start.isSame(dayjs(), 'day')}
+		>
+			<strong class="name">{event.name}</strong>
+			{#if !event.dateOnly && event.oneDayOnly}
+				<span>{event.start.format('HH:mm')}</span>
+			{/if}
+			<strong>{event.start.format('DD.MM.YYYY')}</strong>
+			{#if event.end && !event.oneDayOnly}
+				- <strong>{event.end.format('DD.MM.YYYY')}</strong>
+			{/if}
+		</div>
 	{/each}
 </div>
 
