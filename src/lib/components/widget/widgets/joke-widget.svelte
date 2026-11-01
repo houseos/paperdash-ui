@@ -1,7 +1,5 @@
 <script lang="ts">
-	type Options = {};
-
-	export let options: Options;
+	export const options = {};
 
 	function loadJoke(): Promise<string> {
 		return fetch('https://v2.jokeapi.dev/joke/Programming?format=txt').then((res) => res.text());

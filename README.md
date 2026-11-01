@@ -63,6 +63,16 @@ device MAC addresses without a matching entry. Option values in backend JSON
 are strings; widgets that expect numbers convert them as defined by their
 component.
 
+The weather widget's `apikey` is passed to the browser-side OpenWeatherMap
+script, so it is visible to users who can load the dashboard; use a key with
+appropriate restrictions rather than treating it as a server-side secret. The
+SRS, joke, calendar, and weather widgets fetch third-party resources directly
+from the browser. Calendar hosts must permit cross-origin reads (CORS), and all
+of these widgets require the browser/container to have working network access.
+The backend's screenshot Chromium is launched with web security disabled, so
+successful backend captures do not guarantee the same cross-origin behavior in
+a normal interactive browser.
+
 ## Layout and Screenshot Behavior
 
 The dashboard is designed to fill a 1304 x 984 viewport. Desktop uses a
@@ -88,6 +98,18 @@ npm run preview
 The production build uses `@sveltejs/adapter-node` and is served with Node.
 The Dockerfile builds in a Node 24 image, prunes development dependencies, and
 starts `node build` on port 80.
+
+Build and run the production image on the shared `paperdash` network used by
+the backend:
+
+```sh
+docker build -t paperdash-ui .
+docker run -d --name paperdash-ui --network paperdash -p 8080:80 paperdash-ui
+```
+
+The published image is built by GitHub Actions on pushes to `main` and is
+available from `ghcr.io/<owner>/<repository>` for this repository. Publishing
+the image does not deploy or start a container automatically.
 
 ## Source Map
 

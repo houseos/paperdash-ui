@@ -102,9 +102,9 @@
 <div class="day">Kantine | {day.format('dddd, DD.MM.YYYY')}</div>
 <hr />
 {#await getMenus(options.location) then menus}
-	{#each menus as menu}
+	{#each menus as menu (menu.id)}
 		<div class="items">
-			{#each menu.days[day.isoWeekday() - 1].categories as category}
+			{#each menu.days[day.isoWeekday() - 1].categories as category, index (category.id + index)}
 				{@const item = category.products[0]}
 				{@const name = item.name.split('\n').map((s) => s.trim())}
 				<div class="item" class:highlighted={isHighlighted(item)}>

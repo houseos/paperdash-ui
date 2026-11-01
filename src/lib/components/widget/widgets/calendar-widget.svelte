@@ -112,7 +112,7 @@
 <h2>Kalender</h2>
 
 <div class="events">
-	{#each events as event}
+	{#each events as event, index (event.start.valueOf() + event.name + index)}
 		<div
 			class="event"
 			class:soon={event.soon}

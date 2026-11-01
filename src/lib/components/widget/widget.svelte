@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { WidgetConfig, WidgetType } from './widget-types';
+	import type { WidgetType } from './widget-types';
 	import CalendarWidget from './widgets/calendar-widget.svelte';
 	import JokeWidget from './widgets/joke-widget.svelte';
 	import SrsWidget from './widgets/srs-widget.svelte';
@@ -11,7 +11,7 @@
 		srs: SrsWidget,
 		weather: WeatherWidget,
 		joke: JokeWidget,
-		calendar: CalendarWidget,
+		calendar: CalendarWidget
 	};
 
 	export let widget: WidgetType;
@@ -19,7 +19,10 @@
 </script>
 
 <div class="container">
-	<svelte:component this={WIDGET_COMPONENTS[widget]} {options} />
+	{#if WIDGET_COMPONENTS[widget]}
+		{@const Component = WIDGET_COMPONENTS[widget]}
+		<Component {options} />
+	{/if}
 
 	{#if !WIDGET_COMPONENTS[widget]}
 		<p>unknown widget</p>

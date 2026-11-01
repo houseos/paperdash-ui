@@ -9,9 +9,8 @@
 	export let options: Options;
 
 	onMount(() => {
-		let win = window as any;
-
-		win.myWidgetParam ? win.myWidgetParam : (win.myWidgetParam = []);
+		const win = window as typeof window & { myWidgetParam?: unknown[] };
+		win.myWidgetParam ??= [];
 		win.myWidgetParam.push({
 			id: 21,
 			cityid: options.cityid,
@@ -29,10 +28,10 @@
 	});
 </script>
 
-<div id="openweathermap-widget-21" />
+<div id="openweathermap-widget-21"></div>
 
 <style>
-	img {
+	:global(img) {
 		max-width: 100%;
 	}
 
