@@ -99,12 +99,16 @@ The production build uses `@sveltejs/adapter-node` and is served with Node.
 The Dockerfile builds in a Node 24 image, prunes development dependencies, and
 starts `node build` on port 80.
 
-Build and run the production image on the shared `paperdash` network used by
-the backend:
+The production image listens on port 80. For the Paperdash deployment, Compose
+binds it to `127.0.0.1:8080` for the HTTPS reverse proxy and makes it available
+to the screenshot backend as `http://paperdash-ui:80` on a private Docker
+network. See [`paperdash-backend/README.md`](../paperdash-backend/README.md#production-https-and-docker).
+
+To run it independently:
 
 ```sh
 docker build -t paperdash-ui .
-docker run -d --name paperdash-ui --network paperdash -p 8080:80 paperdash-ui
+docker run -d --name paperdash-ui -p 8080:80 paperdash-ui
 ```
 
 The published image is built by GitHub Actions on pushes to `main` and is
